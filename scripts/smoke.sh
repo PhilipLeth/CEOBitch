@@ -19,13 +19,23 @@ if [ -z "$ORDER_ID" ]; then
   exit 1
 fi
 
-sleep 2
+MAX_WAIT=10
+WAITED=0
+STATUS=""
 
-STATUS="$(curl -fsS "$API_BASE/orders/$ORDER_ID" | \
-  python3 -c "import sys, json; print(json.load(sys.stdin)['order']['status'])")"
+while [ "$WAITED" -lt "$MAX_WAIT" ]; do
+  sleep 1
+  WAITED=$((WAITED + 1))
+  STATUS="$(curl -fsS "$API_BASE/orders/$ORDER_ID" | \
+    python3 -c "import sys, json; print(json.load(sys.stdin)['order']['status'])")"
+  
+  if [ "$STATUS" = "completed" ]; then
+    break
+  fi
+done
 
 if [ "$STATUS" != "completed" ]; then
-  echo "Smoke failed: order status is $STATUS"
+  echo "Smoke failed: order status is $STATUS after ${WAITED}s"
   exit 1
 fi
 
