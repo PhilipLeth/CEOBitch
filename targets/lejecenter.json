@@ -1,0 +1,33 @@
+{
+  "name": "lejecenter",
+  "repoPath": "/Users/philipleth-sorensen/lejecenter.dk",
+  "writeAllow": [
+    "src/",
+    "app/",
+    "pages/",
+    "public/",
+    "content/",
+    "docs/",
+    "tests/",
+    "data/"
+  ],
+  "writeDeny": [
+    ".git/",
+    "node_modules/",
+    "deploy/",
+    "infrastructure/",
+    ".env",
+    ".env.local"
+  ],
+  "verify": [
+    "npm run lint",
+    "npm run build"
+  ],
+  "smoke": {
+    "baseUrl": "http://localhost:3000",
+    "checks": [
+      "/",
+      "/api/health"
+    ]
+  }
+}

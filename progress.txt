@@ -14,3 +14,13 @@ Completed:
 
 No remaining DB/migration/deploy/infra artifacts.
 Kodebasen matcher prd.md 1:1.
+
+Multi-Target Support Plan:
+1. Create targets/lejecenter.json with allowlist/denylist config
+2. Add src/targets/path-guard.ts (guarded fs with allowlist enforcement)
+3. Add src/targets/command-runner.ts (exec with cwd=repoPath, timeout)
+4. Add src/targets/target-loader.ts + target-context.ts (load config, provide runtime)
+5. Wire --target CLI flag into runner for target-scoped execution
+6. Add unit tests for path-guard, command-runner, target-loader
+7. Update docs/README.md with Targets section
+8. Update smoke.sh to support target config (optional)
