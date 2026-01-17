@@ -14,15 +14,47 @@ import { stopControl } from './core/safety';
 import { config } from './config';
 import { OrderStore } from './core/storage/order-store';
 import { OrderProcessor } from './core/autonomous/order-processor';
+import { TargetContext, loadTarget } from './targets';
+
+/**
+ * Parse CLI arguments for --target flag
+ */
+function parseArgs(): { target?: string } {
+  const args = process.argv.slice(2);
+  const targetIndex = args.indexOf('--target');
+  
+  if (targetIndex !== -1 && args[targetIndex + 1]) {
+    return { target: args[targetIndex + 1] };
+  }
+  
+  if (process.env.TARGET) {
+    return { target: process.env.TARGET };
+  }
+  
+  return {};
+}
 
 async function main() {
   // Initialize logger
   initializeLogger();
   const logger = createLogger();
 
+  const cliArgs = parseArgs();
+
   logger.info('Starting CEOBitch AI Organization System');
 
   try {
+    // Load target context if specified
+    let targetContext: TargetContext | undefined;
+    if (cliArgs.target) {
+      logger.info(`Loading target: ${cliArgs.target}`);
+      targetContext = await TargetContext.create(cliArgs.target);
+      logger.info(`Target loaded: ${cliArgs.target}`, {
+        repoPath: targetContext.getCwd(),
+        writeAllow: targetContext.getConfig().writeAllow,
+      });
+    }
+
     // Initialize core components
     const air = new AIR();
     const sandbox = new ExecutionSandbox();
@@ -31,6 +63,10 @@ async function main() {
 
     // Initialize stop control
     stopControl.initialize(sandbox);
+
+    // Expose target context for order processor if available
+    void targetContext;
+    void loadTarget;
 
     // Create order flows
     const orderFlow = new OrderFlow(air, sandbox, ceoBitch, capabilities, logger);

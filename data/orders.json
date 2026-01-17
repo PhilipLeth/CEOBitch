@@ -191,6 +191,14 @@
       "createdAt": "2026-01-17T15:26:32.815Z",
       "updatedAt": "2026-01-17T15:26:36.005Z",
       "attemptCount": 1
+    },
+    "ec4b336e-609a-4a76-9a04-aa2e8068eaa7": {
+      "id": "ec4b336e-609a-4a76-9a04-aa2e8068eaa7",
+      "description": "smoke test: landing page",
+      "status": "completed",
+      "createdAt": "2026-01-17T15:27:46.204Z",
+      "updatedAt": "2026-01-17T15:27:49.495Z",
+      "attemptCount": 1
     }
   },
   "reports": {
@@ -864,6 +872,34 @@
         "environment": "staging"
       },
       "gitCommit": "e063837660495ca8e0ee3459faa7545184ca4c58",
+      "deployed": true
+    },
+    "ec4b336e-609a-4a76-9a04-aa2e8068eaa7": {
+      "approved": true,
+      "report": {
+        "id": "exec-ec4b336e-609a-4a76-9a04-aa2e8068eaa7",
+        "agentId": "b3d82f5e-5dea-4a99-894a-f1b856e84be3",
+        "orderId": "ec4b336e-609a-4a76-9a04-aa2e8068eaa7",
+        "status": "requires_approval",
+        "output": {
+          "success": true,
+          "orderId": "ec4b336e-609a-4a76-9a04-aa2e8068eaa7",
+          "files": [
+            "public/landing-page.html"
+          ]
+        },
+        "logs": [
+          {
+            "timestamp": "2026-01-17T15:27:47.227Z",
+            "level": "info",
+            "message": "Execution started for order: smoke test: landing page"
+          }
+        ],
+        "timestamp": "2026-01-17T15:27:47.227Z",
+        "executionTimeMs": 1000,
+        "environment": "staging"
+      },
+      "gitCommit": "00dcf0d1793b53d65ebfd5d8c422b3012a51eb88",
       "deployed": true
     }
   }
