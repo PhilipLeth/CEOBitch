@@ -119,3 +119,52 @@ v0 bruger en one-shot tick runner (ingen loop i routes):
 - Status model: `submitted` → `in_progress` → `completed` | `failed` | `failed_terminal`
 - Retries med backoff, max 10 attempts
 - Idempotent execution med lock/lease
+
+## Targets (Multi-Repo Support)
+
+CEOBitch kan operere på eksterne repositories via target configs.
+
+### Tilføj nyt target
+
+Opret en JSON fil i `targets/` mappen:
+
+```json
+{
+  "name": "my-project",
+  "repoPath": "/absolute/path/to/repo",
+  "writeAllow": ["src/", "docs/", "tests/", "public/"],
+  "writeDeny": [".git/", "node_modules/", ".env"],
+  "verify": ["npm run lint", "npm run build"],
+  "smoke": {
+    "baseUrl": "http://localhost:3000",
+    "checks": ["/", "/api/health"]
+  }
+}
+```
+
+### Kør runner med target
+
+```bash
+# Via CLI flag
+npm run dev -- --target lejecenter
+
+# Via environment variable
+TARGET=lejecenter npm run dev
+```
+
+### Target Guards (v0)
+
+- **Write allowlist**: Kun paths der matcher `writeAllow` kan skrives til
+- **Write denylist**: Paths der matcher `writeDeny` er altid blokeret
+- **No .git**: Writes til `.git/` er altid blokeret
+- **No destructive ops**: Delete, rename, unlink er ikke tilladt i v0
+- **Path traversal**: `../` traversal er blokeret
+
+### Smoke mod target
+
+Smoke checks køres mod `smoke.baseUrl` med HTTP GET:
+
+```bash
+# Kør smoke checks for et target
+TARGET=lejecenter ./scripts/smoke.sh
+```
