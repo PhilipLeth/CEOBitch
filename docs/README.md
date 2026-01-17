@@ -17,7 +17,7 @@ CEOBitch er et selvstyrende AI-organisationssystem, der automatiserer opgaveudf�
 ```
 Owner Order → AIR Routing → Agent Selection/Creation → 
 Staging Execution → Report Generation → CEO Bitch Review → 
-Approval/Rejection → Live Deployment (if approved)
+Approval/Rejection → Live State (v0: no deployment automation)
 ```
 
 ## API Endpoints
@@ -84,24 +84,17 @@ Konfiguration findes i `src/config/`:
 
 ## Sikkerhed
 
-- Alle agenter kører i staging før live deployment
+- Alle agenter kører i staging før live
 - Risk assessment på alle execution reports
 - Human override mulighed for godkendelser
 - Resource limits på agent execution
 - Runaway detection og instant stop
 
-## Database
+## Persistence (v0)
 
-Schema definitioner i `src/database/schema/`:
+v0 bruger file-backed persistence (JSON under `data/`):
 
-- `agents` - Agent definitions
-- `playbooks` - Playbook templates
-- `orders` - Owner ordrer
-- `executions` - Execution historik
-- `reports` - Execution reports
-- `approvals` - CEO Bitch godkendelser
-- `organization_versions` - Organisation snapshots
-- `capabilities` - Capability registry
+- `data/orders.json` - Orders og execution results
 
 ## Testing
 
@@ -119,12 +112,10 @@ npm run test:e2e
 ./run.sh
 ```
 
-## Deployment
+## Runner Mode
 
-Docker-baseret deployment:
-
-```bash
-docker-compose up -d
-```
-
-Se `deploy/` og `infrastructure/` for deployment scripts og cloud configuration.
+v0 bruger en one-shot tick runner (ingen loop i routes):
+- Orders processeres asynkront af OrderProcessor
+- Status model: `submitted` → `in_progress` → `completed` | `failed` | `failed_terminal`
+- Retries med backoff, max 10 attempts
+- Idempotent execution med lock/lease
