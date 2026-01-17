@@ -1,0 +1,26 @@
+Progress
+
+- [x] PRD updated with goals, non-goals, constraints, data sources, DoD
+- [x] Verification chain added (lint, typecheck, unit, integration, e2e, smoke)
+- [x] Smoke script uses real integrations (API endpoints)
+- [x] Ralph loop runs until DoD is satisfied
+- [x] Blocking issues logged if any
+- [x] Autonomous order processor executes and retries owner orders
+- [x] Owner approvals persist decisions and update order status
+- [x] PRD refined to remove database and migration references
+- [x] PRD updated with DoD behavior checks, roadmap, whitelist, runner mode
+- [x] PRD tightened retries, status model, live state, and v0 capabilities
+- [x] PRD adds idempotent runner requirement and file write scope
+- [x] Database schemas i src/database/schema/
+- [x] Database migrations i src/database/migrations/
+- [x] Alle API endpoints i src/api/ (owner, ceo-bitch, air)
+- [x] Alle workflows i src/workflows/ (order-flow, quality-gate, agent-creation)
+- [x] Unit tests i tests/unit/ (18 tests passing)
+- [x] Integration tests i tests/integration/ (3 tests passing)
+- [x] E2E tests i tests/e2e/ (4 tests passing)
+- [x] docs/ mappe med README dokumentation
+- [x] run.sh passerer alle checks
+- [x] TypeScript kompilerer uden fejl
+- [x] ESLint passerer uden fejl
+- [x] Jest konfigureret med ts-jest
+

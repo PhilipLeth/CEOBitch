@@ -1,0 +1,174 @@
+RALPH — Autonomous Agent Execution (One-Pager)
+Formål
+RALPH er ikke et tool, men en tilstand: kontinuerlig, autonom eksekvering uden menneskelig babysitting. Amp er motoren (coding-agenten). RALPH opnås, når Amp arbejder i et lukket loop styret af filer, ikke chat.
+Kerneprincip
+Agenten må aldrig spørge “hvad nu?”. Alt hvad den behøver for at arbejde videre, skal ligge i repoet.
+Obligatoriske filer (minimum)
+
+
+prd.md
+Indeholder:
+
+
+
+
+Mål (hvad skal bygges)
+
+
+Ikke-mål (hvad skal ignoreres)
+
+
+Tekniske constraints (stack, API’er, versions)
+
+
+Definition of Done (checkliste, binær)
+PRD’en er lov. Chatten er ikke.
+
+
+
+
+run.sh
+Én kommando, der objektivt afgør om arbejdet er korrekt.
+Eksempel:
+
+
+
+
+lint
+
+
+typecheck
+
+
+tests
+
+
+integration
+
+
+smoke
+Alt skal være grønt før “done”.
+
+
+
+
+progress.txt
+Agentens logbog.
+Format (simpelt):
+
+
+
+
+Seneste skridt
+
+
+Hvad virker
+
+
+Hvad mangler
+
+
+Eventuelle blokeringer (konkrete)
+
+
+
+
+(valgfrit men anbefalet) scripts/smoke.sh
+End-to-end bevis på at systemet virker i praksis.
+
+
+Hvordan man opnår RALPH
+Du er i RALPH, når:
+
+
+Du giver én instruktion i Agent-mode
+
+
+Agenten arbejder videre uden opfølgende spørgsmål
+
+
+Fremdrift styres via commits + progress.txt
+
+
+Sandhed afgøres udelukkende af run.sh
+
+
+Du afbryder kun for at ændre PRD (ikke for at “hjælpe”)
+
+
+Hvis du retter kode i hånden → du er ikke i RALPH.
+Hvordan du starter Amp / Ralph i Cursor
+
+
+Forbered repoet
+
+
+
+
+Opret prd.md, run.sh, progress.txt
+
+
+Sørg for at run.sh kan køres lokalt
+
+
+Commit udgangspunktet
+
+
+
+
+Skift til Agent-mode i Cursor
+
+
+Giv denne type instruktion (én besked):
+“Implementer PRD’en i dette repo.
+Arbejd iterativt.
+Efter hvert meningsfuldt skridt:
+
+
+
+
+kør ./run.sh
+
+
+opdater progress.txt
+Stop først når Definition of Done er opfyldt.”
+
+
+
+
+Gør ingenting
+Ingen dialog. Ingen rettelser. Ingen “men husk også…”.
+
+
+Kun tre tilladte menneske-indgreb
+
+
+
+
+PRD er forkert → ret prd.md
+
+
+Agenten sidder fast → agenten skal skrive det i progress.txt
+
+
+Opgaven er færdig → du evaluerer output
+
+
+Anti-patterns (det der ødelægger RALPH)
+
+
+Løbende feedback i chatten
+
+
+“Kan du også lige…” midt i arbejdet
+
+
+Uklare accept-kriterier
+
+
+Flere sandheder (tests + “jeg kan se det virker”)
+
+
+Mental model
+Amp = ekstremt hurtig junior engineer
+RALPH = ledelsesform uden micromanagement
