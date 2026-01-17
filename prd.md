@@ -154,13 +154,6 @@ Quality Metrics: Kvalitetsovervågning over tid
 Risk Tracking: Risiko identificering
 Performance Metrics: System performance
 Alert System: Alarmer ved problemer
-Deployment
-Lokation: deploy/
-
-Docker Setup: Containerisation
-Cloud Config: Deployment scripts
-Environment Variables: Config management
-CI/CD: Automated deployment pipeline
 Filstruktur
 CEOBitch/
 ├── src/
@@ -182,7 +175,7 @@ CEOBitch/
 │   ├── unit/
 │   ├── integration/
 │   └── e2e/
-├── deploy/                   # Deployment scripts
+├── data/                     # File-backed persistence (v0)
 └── docs/                     # Documentation
 Implementation Prioritet
 Core Infrastructure: Basic types, config
